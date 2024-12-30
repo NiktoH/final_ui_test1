@@ -1,8 +1,7 @@
 import time
-
 import allure
-from selenium.webdriver.support.wait import WebDriverWait
 
+from selenium.webdriver.support.wait import WebDriverWait
 from pages.BasePage import BasePage
 from pages.DynamicTablePage import DynamicTablePage
 from pages.LoadDelayPage import LoadDelayPage
@@ -14,8 +13,7 @@ from pages.TextInputPage import TextInputPage
 
 @allure.title(r"Проверка заданий с прогрессбаром")
 def test_1_progress_bar(driver):
-    main_page = MainPage(driver)
-    main_page.click_pr()
+    driver.get('http://uitestingplayground.com/progressbar')
 
     progress_bar_page = ProgressBarPage(driver)
     progress_bar_page.click_start_button()
@@ -30,6 +28,7 @@ def test_1_progress_bar(driver):
 
 @allure.title(r"Проверка загрузки страницы Load Delay")
 def test_2_load_delay(driver):
+    driver.get('http://uitestingplayground.com/')
     main_page = MainPage(driver)
     main_page.click_ld()
 
@@ -39,8 +38,7 @@ def test_2_load_delay(driver):
 
 @allure.title(r"Проверка ввода названия кнопки")
 def test_3_text_input(driver):
-    main_page = MainPage(driver)
-    main_page.click_ti()
+    driver.get('http://uitestingplayground.com/textinput')
 
     text_input_page = TextInputPage(driver)
     assert text_input_page.check_btn_name() == "Button That Should Change it's Name Based on Input Value", "Не найдена кнопка"
@@ -50,8 +48,7 @@ def test_3_text_input(driver):
 
 @allure.title(r"Проверка значения Chrome cpu")
 def test_4_dynamic_table(driver):
-    main_page = MainPage(driver)
-    main_page.click_dt()
+    driver.get('http://uitestingplayground.com/dynamictable')
     time.sleep(10)
 
     dynamic_table_page = DynamicTablePage(driver)
@@ -59,8 +56,7 @@ def test_4_dynamic_table(driver):
 
 @allure.title(r"Проверка локатора non-spacing текста")
 def test_5_nbsp(driver):
-    main_page = MainPage(driver)
-    main_page.click_nbsp()
+    driver.get('http://uitestingplayground.com/nbsp')
 
     nbsp_page = NbspPage(driver)
     assert nbsp_page.get_btn_text() == "My Button"
