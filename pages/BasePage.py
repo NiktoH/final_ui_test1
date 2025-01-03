@@ -18,12 +18,13 @@ class BasePage:
         return self.wait.until(expected_conditions.visibility_of_element_located((by, value)),
                                message=f'Элемент {by, value} не найден')
 
-    def find_elements(self, by: By or int, value: str) -> [WebElement]:
+    def find_elements(self, by: By or int, value: str) -> list[WebElement]:
         return self.wait.until(expected_conditions.visibility_of_all_elements_located((by, value)),
                                message=f'Элемент {by, value} не найден')
 
-    def get_current_url(self) -> str:
-        return self.driver.current_url
+    def get_element(self, locator) -> WebElement:
+        element = self.find_element(*locator)
+        return element
 
     def click_element(self, locator) -> None:
         element = self.find_element(*locator)
@@ -32,10 +33,6 @@ class BasePage:
     def get_text(self, locator) -> str:
         element = self.find_element(*locator)
         return element.text
-
-    def get_element(self, locator) -> WebElement:
-        element = self.find_element(*locator)
-        return element
 
     def fill_field(self, locator, value):
         """
@@ -47,3 +44,10 @@ class BasePage:
         field = self.find_element(*locator)
         field.clear()  # очищаем поле перед вводом
         field.send_keys(value)
+
+    def get_element_displayed(self, locator):
+        return self.find_element(*locator).is_displayed()
+
+
+    def driver_url(self, page_url) -> str:
+        return self.driver.get(page_url)

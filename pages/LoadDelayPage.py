@@ -16,10 +16,9 @@ class LoadDelayPage(BasePage):
         self.load_delay_btn = (By.XPATH, '//button[contains(text(), "Button Appearing After Delay")]')
         self.wait = WebDriverWait(driver, timeout=2)
 
-    @allure.step(r"Проверить, что кнопка Button Appearing After Delay отображается")
-    def check_load_delay_btn(self):
+    def check_load_delay_btn_text(self) -> str:
         return self.get_text(self.load_delay_btn)
 
     @allure.step(r"Ждать, пока страница не загрузится")
     def wait_load_delay(self):
-        self.wait.until(lambda d: self.check_load_delay_btn())
+        self.wait.until(lambda d: self.check_load_delay_btn_text())

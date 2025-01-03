@@ -25,7 +25,6 @@ class TextInputPage(BasePage):
     def click_new_btn(self):
         self.click_element(self.new_btn)
 
-    @allure.step(r"Проверить новое имя кнопки")
+    @allure.step(r"Получить текст кнопки")
     def check_btn_name(self) -> str:
        return self.get_text(self.new_btn)
-

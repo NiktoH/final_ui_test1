@@ -21,4 +21,4 @@ class NbspPage(BasePage):
 
     @allure.step(r"Проверить наличие кнопки")
     def check_btn(self):
-        return self.find_element(*self.button)
+        return self.get_element_displayed(self.button)

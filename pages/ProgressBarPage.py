@@ -22,7 +22,7 @@ class ProgressBarPage(BasePage):
     def click_start_button(self) -> None:
         self.click_element(self.start_btn)
 
-    @allure.step(r"Проверить, что прогрессбар стал 75%")
+    @allure.step(r"Проверить установку значения прогресс бара в 75% и нажать кнопку")
     def check_progressbar_percent(self) -> None:
         while True:
             value = self.get_text(self.progress_bar)
@@ -31,14 +31,12 @@ class ProgressBarPage(BasePage):
                     self.click_element(self.stop_btn)
                 break
 
-    @allure.step(r"Проверить, что Result < 5")
+    @allure.step(r"Получить значение Result < 5")
     def check_result_number(self) -> int:
         return int(self.get_text(self.result_nmb)[8])
 
-    @allure.step(r"Проверить, что Duration < 17000")
-    def check_duration_number(self) -> int:
-        return int(self.get_text(self.result_nmb)[21:])
-
-
-
-
+    @allure.step(r"Получить значение Duration < 17000")
+    def check_duration_number(self):
+        element = int(self.get_text(self.result_nmb)[21:])
+        if element >= 17000:
+            self.click_start_button()
